@@ -32,4 +32,3 @@ type: "gallery"
     <img src="https://raw.githubusercontent.com/travisforfree/blog-images/main/DSC_1712.JPG" alt="描述">
   </div>
 </div>
-# cdn.jsdelivr.net/gh/替换里面raw部分

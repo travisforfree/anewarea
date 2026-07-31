@@ -86,24 +86,29 @@
     </div>
   </section>
 <% } %>
-<!-- 页面向下滚动时大标题渐隐/淡出效果 -->
+<!-- 主标题 + 副标题 滚动渐隐脚本 -->
 <script>
   window.addEventListener('scroll', function() {
-    // 自动抓取包含大标题和副标题的头部区域元素
-    const headerTitleBox = document.querySelector('.site-header') || 
-                           document.querySelector('.header-info') || 
-                           document.querySelector('.brand') ||
-                           document.querySelector('header h1')?.parentElement;
-    
-    if (headerTitleBox) {
-      let scrollY = window.scrollY;
-      // 在向下滚动 0 到 200 像素的过程中，透明度从 1 匀速降为 0
-      let opacity = 1 - (scrollY / 200);
-      
-      if (opacity < 0) opacity = 0;
-      
-      headerTitleBox.style.opacity = opacity;
-      headerTitleBox.style.transition = 'opacity 0.1s linear'; // 保持平滑过渡
-    }
+    // 明确把你的主标题和副标题文本都列出来
+    const targetTexts = [
+      "A NEW AREA",
+      "All you need is freedom and love."
+    ];
+
+    // 遍历页面上的所有标题、段落和容器元素
+    document.querySelectorAll('h1, h2, h3, p, div, span, header').forEach(el => {
+      // 判断元素内是否包含主标题或副标题（并且不是包含整个网页的大容器）
+      const text = el.innerText ? el.innerText.trim() : '';
+      if (targetTexts.some(t => text === t) || targetTexts.some(t => text.includes(t) && el.children.length <= 1)) {
+        
+        let scrollY = window.scrollY;
+        // 滚动 0px 到 180px 期间，透明度从 1 匀速降到 0
+        let opacity = 1 - (scrollY / 180);
+        if (opacity < 0) opacity = 0;
+
+        el.style.opacity = opacity;
+        el.style.transition = 'opacity 0.1s linear';
+      }
+    });
   });
 </script>
