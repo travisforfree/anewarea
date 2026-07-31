@@ -29,6 +29,6 @@ type: "gallery"
 <div class="gallery-grid">
   <div class="gallery-item">
     <!-- 将 src 里面的内容替换为你 PicGo 刚上传的真实图片链接 -->
-    <img src="![](https://raw.githubusercontent.com/travisforfree/blog-images/main/DSC_1712.JPG)" alt="描述">
+    <img src="(https://raw.githubusercontent.com/travisforfree/blog-images/main/DSC_1712.JPG)" alt="描述">
   </div>
 </div>
