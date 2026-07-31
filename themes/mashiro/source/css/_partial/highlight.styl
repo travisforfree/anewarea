@@ -1,0 +1,139 @@
+// https://github.com/chriskempson/tomorrow-theme
+highlight-background = #ffffff
+highlight-current-line = #efefef
+highlight-selection = #d6d6d6
+highlight-foreground = #4d4d4c
+highlight-comment = #8e908c
+highlight-red = #c82829
+highlight-orange = #f5871f
+highlight-yellow = #eab700
+highlight-green = #718c00
+highlight-aqua = #3e999f
+highlight-blue = #4271ae
+highlight-purple = #8959a8
+
+$code-block
+  background: highlight-background
+  margin: 0
+  border-style: solid
+  border-color: color-border
+  border-width: 1px
+  overflow: auto
+  color: highlight-foreground
+  line-height: font-size * line-height
+
+$line-numbers
+  color: #666
+  font-size: 0.85em
+
+.article-entry
+  pre, code
+    font-family: font-mono
+  code
+    background: color-background
+    text-shadow: 0 1px #fff
+    padding: 0 0.3em
+  pre
+    @extend $code-block
+    padding: 15px
+    code
+      background: none
+      text-shadow: none
+      padding: 0
+  .highlight
+    @extend $code-block
+    margin-top: 20px
+    margin-bottom: 20px
+    padding: 0
+    pre
+      border: none
+      margin: 0
+      padding: 15px
+  .gist
+    margin: 0 article-padding * -1
+    border-style: solid
+    border-color: color-border
+    border-width: 1px 0
+    background: highlight-background
+    padding: 15px article-padding 15px 0
+    .gist-file
+      border: none
+      font-family: font-mono
+      margin: 0
+      .gist-data
+        background: none
+        border: none
+        .line-numbers
+          @extend $line-numbers
+          background: none
+          border: none
+          padding: 0 20px 0 0
+        .line-data
+          padding: 0 !important
+      .highlight
+        margin: 0
+        padding: 0
+        border: none
+      .gist-meta
+        background: highlight-background
+        color: highlight-comment
+        font: 0.85em font-sans
+        text-shadow: 0 0
+        padding: 0
+        margin-top: 1em
+        margin-left: article-padding
+        a
+          color: color-link
+          font-weight: normal
+          &:hover
+            text-decoration: underline
+
+pre
+  .hljs-comment
+  .hljs-title
+    color: highlight-comment
+  .hljs-variable
+  .hljs-attribute
+  .hljs-tag
+  .hljs-regexp
+  .hljs-ruby .hljs-constant
+  .hljs-xml .hljs-tag .hljs-title
+  .hljs-xml .hljs-pi
+  .hljs-xml .hljs-doctype
+  .hljs-html .hljs-doctype
+  .hljs-css .hljs-id
+  .hljs-css .hljs-class
+  .hljs-css .hljs-pseudo
+    color: highlight-red
+  .hljs-number
+  .hljs-preprocessor
+  .hljs-built_in
+  .hljs-literal
+  .hljs-params
+  .hljs-constant
+    color: highlight-orange
+  .hljs-class
+  .hljs-ruby .hljs-class .hljs-title
+  .hljs-css .hljs-rules .hljs-attribute
+    color: highlight-green
+  .hljs-string
+  .hljs-value
+  .hljs-inheritance
+  .hljs-header
+  .hljs-ruby .hljs-symbol
+  .hljs-xml .hljs-cdata
+    color: highlight-green
+  .hljs-css .hljs-hexcolor
+    color: highlight-aqua
+  .hljs-function
+  .hljs-python .hljs-decorator
+  .hljs-python .hljs-title
+  .hljs-ruby .hljs-function .hljs-title
+  .hljs-ruby .hljs-title .hljs-keyword
+  .hljs-perl .hljs-sub
+  .hljs-javascript .hljs-title
+  .hljs-coffeescript .hljs-title
+    color: highlight-blue
+  .hljs-keyword
+  .hljs-javascript .hljs-function
+    color: highlight-purple

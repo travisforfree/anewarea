@@ -1,0 +1,203 @@
+@import "nib"
+@import "_variables"
+@import "_util/mixin"
+@import "_util/grid"
+@import "_extend"
+
+global-reset()
+
+input, button
+  margin: 0
+  padding: 0
+  &::-moz-focus-inner
+    border: 0
+    padding: 0
+
+@font-face
+  font-family: FontAwesome
+  font-style: normal
+  font-weight: normal
+  src: url(font-icon-path + ".eot?v=" + font-icon-version)
+  src: url(font-icon-path + ".eot?#iefix&v=" + font-icon-version) format("embedded-opentype"),
+       url(font-icon-path + ".woff2?v=" + font-icon-version) format("woff2"),
+       url(font-icon-path + ".woff?v=" + font-icon-version) format("woff"),
+       url(font-icon-path + ".ttf?v=" + font-icon-version) format("truetype"),
+       url(font-icon-path + ".svg?v=" + font-icon-version + "#fontawesomeregular") format("svg")
+
+@font-face
+  font-family: LM-Mono-10
+  font-style: normal
+  font-weight: normal
+  src: url("fonts/lmmono10-regular.ttf")
+
+@font-face
+  font-family: LM-Mono-10
+  font-style: italic
+  font-weight: normal
+  src: url("fonts/lmmono10-italic.ttf")
+
+@font-face
+  font-family: LM-Roman-10
+  font-style: normal
+  font-weight: normal
+  src: url("fonts/lmroman10-regular.ttf")
+
+@font-face
+  font-family: LM-Roman-10
+  font-style: italic
+  font-weight: normal
+  src: url("fonts/lmroman10-italic.ttf")
+
+@font-face
+  font-family: LM-Roman-10
+  font-style: normal
+  font-weight: bold
+  src: url("fonts/lmroman10-bold.ttf")
+
+@font-face
+  font-family: LM-Roman-10
+  font-style: italic
+  font-weight: bold
+  src: url("fonts/lmroman10-bolditalic.ttf")
+
+// @font-face
+//   font-family: Chinese
+//   font-style: normal
+//   font-weight: normal
+//   src: url(Chinese-normal-normal-path)
+
+// @font-face
+//   font-family: Chinese
+//   font-style: normal
+//   font-weight: bold
+//   src: url(Chinese-normal-bold-path)
+
+// // if (main-glyph == "CTeX")
+// @font-face
+//   font-family: Chinese
+//   font-style: italic
+//   font-weight: normal
+//   src: url(Chinese-italic-normal-path)
+
+// @font-face
+//   font-family: ChineseMono;
+//   font-style: normal
+//   font-weight: normal
+//   src: url(ChineseMono-normal-normal-path);
+
+@font-face
+  font-family: biaodian;
+  font-style: normal
+  font-weight: normal
+  src: url("fonts/biaodian-minus59.ttf");
+  // unicode-range:
+  //   U+"+FF0E", U+"+2014", U+"+2026", U+"+00B7", U+"+201C-201D", U+"+2018-2019", U+"+25CF",
+  //   U+"+3002", U+"+FF0C", U+"+3001",
+  //   U+"+FF1B", U+"+FF1A", U+"+FF1F", U+"+FF01",
+  //   U+"+FF0D", U+"+FF0F", U+"+FF3C",
+  //   U+"+300C-300F",
+  //   U+"+300A-300B", U+"+3008-3009", U+"+FF08-FF09", U+"+3014-3015"
+
+@font-face
+  font-family: biaodian;
+  font-style: italic
+  font-weight: normal
+  src: url("fonts/biaodian-minus59.ttf");
+
+@font-face
+  font-family: biaodian;
+  font-style: normal
+  font-weight: bold
+  src: url("fonts/biaodian-minus59.ttf");
+
+@font-face
+  font-family: biaodian;
+  font-style: italic
+  font-weight: bold
+  src: url("fonts/biaodian-minus59.ttf");
+
+html
+  scroll-padding-top: 80px;
+
+html, body, #container
+  height: 100%
+
+body
+  background: color-background
+  font: font-size font-serif, sans-serif
+  -webkit-text-size-adjust: 100%
+
+#content
+  margin: 0 auto
+  @extend $variable-width
+
+.outer
+  clearfix()
+  margin: 0 auto
+  @extend $variable-width
+
+.inner
+  column(columns)
+
+.left, .alignleft
+  float: left
+
+.right, .alignright
+  float: right
+
+.clear
+  clear: both
+
+#container
+  position: relative
+
+.mobile-nav-on
+  overflow: hidden
+
+#wrap
+  height: 100%
+  width: 100%
+  position: absolute
+  top: 0
+  left: 0
+  transition: 0.2s ease-out
+  z-index: 1
+  background: color-background
+  display: flex
+  flex-direction: column
+  .mobile-nav-on &
+    left: 50%
+
+if sidebar and sidebar isnt bottom
+  #main
+    @media mq-normal
+      column(main-column)
+
+if sidebar is left
+  @media mq-normal
+    #main
+      float: right
+
+#main-404
+  font-size: 40px
+  font-weight: bold
+  font-family: font-serif
+  text-align: center
+  margin: 100px 0
+
+a
+  transition: 0.2s
+
+@import "_partial/header"
+@import "_partial/article"
+@import "_partial/archive"
+@import "_partial/footer"
+@import "_partial/highlight"
+@import "_partial/mobile"
+@import "_partial/about"
+@import "_partial/bilibili"
+@import "_partial/toc"
+@import "_partial/biaodian"
+
+if sidebar
+  @import "_partial/sidebar"
