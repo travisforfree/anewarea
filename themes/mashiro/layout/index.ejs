@@ -86,3 +86,24 @@
     </div>
   </section>
 <% } %>
+<!-- 页面向下滚动时大标题渐隐/淡出效果 -->
+<script>
+  window.addEventListener('scroll', function() {
+    // 自动抓取包含大标题和副标题的头部区域元素
+    const headerTitleBox = document.querySelector('.site-header') || 
+                           document.querySelector('.header-info') || 
+                           document.querySelector('.brand') ||
+                           document.querySelector('header h1')?.parentElement;
+    
+    if (headerTitleBox) {
+      let scrollY = window.scrollY;
+      // 在向下滚动 0 到 200 像素的过程中，透明度从 1 匀速降为 0
+      let opacity = 1 - (scrollY / 200);
+      
+      if (opacity < 0) opacity = 0;
+      
+      headerTitleBox.style.opacity = opacity;
+      headerTitleBox.style.transition = 'opacity 0.1s linear'; // 保持平滑过渡
+    }
+  });
+</script>
