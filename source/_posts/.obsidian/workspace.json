@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "a5c7946497c29585",
+    "id": "234b9221144343a8",
     "type": "split",
     "children": [
       {
-        "id": "c2075f111d1fd5bd",
+        "id": "1974c77aedaf28c1",
         "type": "tabs",
         "children": [
           {
-            "id": "4f3982286c6ea2bb",
+            "id": "867d2a6691b3068d",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -23,28 +23,30 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "a4e2ffe7d4322e85",
+    "id": "5d350f56d6e5e641",
     "type": "split",
     "children": [
       {
-        "id": "a687fc4b2ad42f5b",
+        "id": "ceef9c36c302cc24",
         "type": "tabs",
         "children": [
           {
-            "id": "d2d47a7574b4c4ca",
+            "id": "d8392180eba4fbe9",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
             }
           },
           {
-            "id": "7a995345e86e1358",
+            "id": "6b1053d57da6c362",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -61,11 +63,14 @@
             }
           },
           {
-            "id": "dc17a5dddcba74ce",
+            "id": "0e440975e1ede25f",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {},
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
               "icon": "lucide-bookmark",
               "title": "书签"
             }
@@ -77,20 +82,19 @@
     "width": 300
   },
   "right": {
-    "id": "64024b6bf1982d30",
+    "id": "aab7dcd91162f769",
     "type": "split",
     "children": [
       {
-        "id": "64b596ea5ab047d7",
+        "id": "d6b9c47e0a5515a9",
         "type": "tabs",
         "children": [
           {
-            "id": "fb2eccd81c4939cc",
+            "id": "37567176567de18c",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "hello-world.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,25 +104,24 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "hello-world 的反向链接列表"
+              "title": "反向链接"
             }
           },
           {
-            "id": "fcd0bcbccb0e9564",
+            "id": "3136d70acce12829",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "hello-world.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "hello-world 的出链列表"
+              "title": "出链"
             }
           },
           {
-            "id": "f14a372ff3a8791f",
+            "id": "e1ace211f2eeb1d8",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -133,7 +136,7 @@
             }
           },
           {
-            "id": "1a117fceadb46272",
+            "id": "5e5bb812054a8f34",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -147,36 +150,25 @@
             }
           },
           {
-            "id": "bdd1f09b538186fc",
+            "id": "11368fbdfc17bd7c",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "hello-world.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "hello-world 的大纲"
-            }
-          },
-          {
-            "id": "478f8c5c4da6935e",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "title": "大纲"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -186,12 +178,13 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:新建数据库": false,
-      "obsidian-git:Open Git source control": false
+      "bases:新建数据库": false
     }
   },
-  "active": "478f8c5c4da6935e",
+  "active": "867d2a6691b3068d",
   "lastOpenFiles": [
-    "hello-world.md"
+    "travisforfree.md",
+    "未命名.md",
+    "未命名.base"
   ]
 }
