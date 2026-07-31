@@ -1,15 +1,55 @@
-<!-- 1. 顶部文字区 (直接在这里写你的感悟，所见即所得) -->
-<section class="home-thoughts" style="padding: 40px 20px; text-align: center; margin-bottom: 50px;">
-  <p style="color: #444; line-height: 1.8; margin: 0; font-size: 1.1em; font-family: 'Georgia', serif; font-style: italic;">
-    <!-- 👇 把下面这句话替换成你真正想写的文字 👇 -->
+<!-- 在最顶部注入微交互的 CSS 动画样式 -->
+<style>
+  /* 定义互动标题的基础样式 */
+  .interactive-title {
+    color: #333;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-family: 'Georgia', serif;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block; /* 必须是 inline-block 才能支持物理跳动 */
+    transition: all 0.2s ease; /* 动画过渡速度 */
+    position: relative;
+  }
+
+  /* 悬停效果 (Hover)：从中间向两端“分割”出一条线 */
+  .interactive-title::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: #333;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  .interactive-title:hover::after {
+    width: 100%;
+  }
+
+  /* 点击按压效果 (Active)：向下小跳动 + 字母间距瞬间裂开 */
+  .interactive-title:active {
+    transform: translateY(4px) scale(0.96); /* 向下移动并微微缩小 */
+    letter-spacing: 6px; /* 字母向两边分割撑开 */
+  }
+</style>
+
+<!-- ================= 下面是页面结构 ================= -->
+
+<!-- 1. 顶部感悟区 -->
+<section class="home-thoughts" style="margin-bottom: 60px; margin-top: 20px;">
+  <p style="text-align: left; margin-left: -20px; color: #444; line-height: 1.8; font-size: 1.1em; font-family: 'Georgia', serif; font-style: italic;">
     最近活得很假也很痛苦，想到学业内容更加痛苦了
   </p>
 </section>
 
 <!-- 2. Article (最新文章区) -->
 <section class="home-articles" style="margin-bottom: 80px;">
-  <h2 style="text-align: center; border-bottom: none; margin-bottom: 40px;">
-    <span style="color: #333; font-weight: 300; letter-spacing: 2px; font-family: 'Georgia', serif; font-size: 1.2em;">Article</span>
+  <h2 style="text-align: left; border-bottom: none; margin-bottom: 40px; margin-left: -20px;">
+    <!-- 顺便给 Article 加了点击跳转到全部归档页的功能，并赋予互动 class -->
+    <a href="<%= url_for('/archives/') %>" class="interactive-title">Article</a>
   </h2>
   
   <% page.posts.each(function(post){ %>
@@ -26,19 +66,20 @@
   <% } %>
 </section>
 
-<!-- 分割线 -->
-<div style="width: 40px; height: 1px; background-color: #ddd; margin: 0 auto 60px auto;"></div>
+<!-- 优雅的短分割线 -->
+<div style="width: 40px; height: 1px; background-color: #ddd; margin: 0 0 60px -20px;"></div>
 
 <!-- 3. Gallery (图库预览区) -->
 <% if (site.data.gallery && site.data.gallery.length > 0) { %>
   <section class="home-gallery-preview" style="margin-bottom: 60px;">
-    <h2 style="text-align: center; border-bottom: none; margin-bottom: 40px;">
-      <a href="/gallery/" style="color: #333; text-decoration: none; font-weight: 300; letter-spacing: 2px; font-family: 'Georgia', serif; font-size: 1.2em;">Gallery</a>
+    <h2 style="text-align: left; border-bottom: none; margin-bottom: 40px; margin-left: -20px;">
+      <!-- 赋予互动 class -->
+      <a href="<%= url_for('/gallery/') %>" class="interactive-title">Gallery</a>
     </h2>
     
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
       <% site.data.gallery.slice(0, 3).forEach(function(img){ %>
-        <a href="/gallery/" style="display: block; overflow: hidden; border-radius: 4px;">
+        <a href="<%= url_for('/gallery/') %>" style="display: block; overflow: hidden; border-radius: 4px;">
           <img src="<%= img.url %>" style="width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         </a>
       <% }) %>

@@ -25,7 +25,7 @@ type: "gallery"
 }
 </style>
 
-### 📅 2026-07-31
+### 2026-07-31
 <div class="gallery-grid">
   <div class="gallery-item">
     <!-- 将 src 里面的内容替换为你 PicGo 刚上传的真实图片链接 -->
