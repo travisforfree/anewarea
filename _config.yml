@@ -103,3 +103,7 @@ theme: mashiro
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# 博客加密配置
+encrypt:
+  enable: true
