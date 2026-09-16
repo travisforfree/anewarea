@@ -1,6 +1,6 @@
 <div id="nav-outer">
   <nav id="main-nav" class="outer">
-    <a id="main-nav-toggle" class="nav-icon"></a>
+    <button id="main-nav-toggle" class="nav-icon" type="button" aria-label="展开菜单" aria-controls="mobile-nav" aria-expanded="false"></button>
     <% for (var i in theme.menu){ %>
       <a class="main-nav-link" href="<%- url_for(theme.menu[i], {relative: theme.menu[i][0] != '/'}) %>"><%= i %></a>
     <% } %>

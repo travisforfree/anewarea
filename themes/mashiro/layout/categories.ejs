@@ -1,0 +1,6 @@
+<section class="content-section">
+  <h1 class="section-title">分类</h1>
+  <% if (!site.categories.length) { %><p class="empty-state">发布带分类的内容后，会在这里显示。</p><% } else { %>
+    <nav aria-label="内容分类" class="category-tree"><%- list_categories({depth: 0, show_count: true}) %></nav>
+  <% } %>
+</section>

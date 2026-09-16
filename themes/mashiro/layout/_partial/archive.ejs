@@ -1,3 +1,4 @@
+<% if (!page.posts.length) { %><p class="empty-state">还没有归档内容。</p><% } %>
 <% if (pagination == 2){ %>
   <% page.posts.each(function(post){ %>
     <%- partial('article', {post: post, index: true}) %>

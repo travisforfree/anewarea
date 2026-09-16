@@ -1,57 +1,31 @@
-# Header
 menu:
-  Home: /
-  Gallery: /gallery/
-  Archives: /archives
-  # About: /about
-
-# Content
-excerpt_link: Read More
-fancybox: true
-
-# Sidebar
-# sidebar: none
-# widgets:
-# - recent_posts
-# - category
-# - tagcloud
-
-copyright: |-
-  © 2026 travisforfree. All rights reserved.
-
-# toc open 
+  首页: /
+  文章: /articles/
+  照片: /gallery/
+  音乐: /music/
+  视频: /videos/
+  分类: /categories/
+  归档: /archives/
+excerpt_link: 阅读全文
+sidebar: false
+widgets: []
+archive_type: monthly
+show_count: true
+recent_posts_limits: 5
 toc:
   enable: true
   default: false
-
-# Widget behavior
-archive_type: 'monthly'
-show_count: false
-recent_posts_limits: 5
-
-
-# favicon: /favicon.ico
-# rss: /atom.xml
-
-# valine comment system. https://valine.js.org
-valine:
-  enable: false # if you want use valine,please set this value is true
-  appId:  # leancloud application app id
-  appKey:  # leancloud application app key
-  notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
-  verify: false # valine verify code (true/false)
-  pageSize: 10 # comment list page size
-  avatar: mm # gravatar style https://valine.js.org/#/avatar
-  lang: zh-cn # i18n: zh-cn/en
-  placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
-  guest_info: nick,mail,link #valine comment header info
-
 math:
   enable: true
   engine: mathjax
-
-# title-number : all | config | none
 title-number: config
-
-# blockquote: italic | grey
 blockquote: grey
+giscus:
+  enable: true
+  repo: travisforfree/anewarea
+  repo_id: R_kgDOToWFVQ
+  category: General
+  category_id: DIC_kwDOToWFVc4DCUMR
+  mapping: pathname
+  theme: preferred_color_scheme
+  lang: zh-CN

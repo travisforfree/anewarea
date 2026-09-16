@@ -1,0 +1,12 @@
+<% var g = theme.giscus;
+   if (g && g.enable && is_post() && post.comments !== false && !post.password && g.repo && g.repo_id && g.category_id) { %>
+<section id="comments" aria-label="评论">
+  <script src="https://giscus.app/client.js"
+    data-repo="<%= g.repo %>" data-repo-id="<%= g.repo_id %>"
+    data-category="<%= g.category %>" data-category-id="<%= g.category_id %>"
+    data-mapping="<%= g.mapping %>" data-strict="0" data-reactions-enabled="1"
+    data-emit-metadata="0" data-input-position="bottom"
+    data-theme="<%= g.theme %>" data-lang="<%= g.lang %>"
+    crossorigin="anonymous" async></script>
+</section>
+<% } %>

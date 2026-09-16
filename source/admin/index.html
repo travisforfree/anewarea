@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: blob: data:; connect-src https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>内容管理 · A NEW AREA</title>
+  <link rel="stylesheet" href="./admin.css">
+  <script defer src="./config.js"></script>
+  <script defer src="./vendor/js-yaml.min.js"></script>
+  <script defer src="./model.js"></script>
+  <script defer src="./github.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar"><h1>内容管理</h1><nav><a id="site-link" href="../">返回博客</a><button id="logout" type="button" hidden>退出登录</button></nav></header>
+  <main>
+    <section id="login-panel" class="panel login">
+      <h2>连接你的博客</h2>
+      <p>使用 GitHub 仓库访问令牌登录。令牌只保留在当前页面内存中，刷新或关闭页面后需要重新登录。</p>
+      <p id="repo-name"></p>
+      <form id="login-form">
+        <label for="token">GitHub 访问令牌</label>
+        <input id="token" type="password" required autocomplete="off" spellcheck="false" placeholder="粘贴仅授权此博客仓库的令牌">
+        <button type="submit">登录</button>
+      </form>
+      <details>
+        <summary>第一次使用：如何获取登录令牌</summary>
+        <ol>
+          <li>前往 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">GitHub 创建细粒度访问令牌</a>。</li>
+          <li>设置名称和有效期，选择你的博客仓库。</li>
+          <li>Repository permissions 中将 <strong>Contents</strong> 设置为 <strong>Read and write</strong>；Metadata 保持默认。</li>
+          <li>生成后粘贴到上面的输入框。不要填写 GitHub 登录密码。</li>
+        </ol>
+      </details>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p id="deployment" hidden>内容已保存，网站更新还需等待自动发布完成。<a id="actions-link" target="_blank" rel="noopener noreferrer">查看发布进度</a></p>
+    <div id="workspace" hidden>
+      <aside class="panel library">
+        <div class="row"><h2>内容列表</h2><button id="refresh" type="button">刷新</button></div>
+        <button id="new-entry" type="button" class="primary">新建内容</button>
+        <label for="search">搜索内容</label><input id="search" type="search" placeholder="标题、类型或分类">
+        <div id="entries"></div>
+      </aside>
+      <section class="panel editor">
+        <h2 id="editor-title">新建内容</h2>
+        <form id="editor-form">
+          <div class="columns">
+            <div><label for="kind">内容类型</label><select id="kind"><option value="article">文章</option><option value="photo">照片</option><option value="music">音乐</option><option value="video">视频</option></select></div>
+            <div><label for="date">发布日期</label><input id="date" type="datetime-local" required></div>
+          </div>
+          <label for="title">标题</label><input id="title" maxlength="200" required>
+          <label for="description">简短介绍</label><textarea id="description" rows="2" placeholder="用于首页和列表预览"></textarea>
+          <label for="categories">分类层级</label>
+          <textarea id="categories" rows="2" placeholder="例如：生活 / 旅行 / 深圳&#10;多条分类路径可以分行填写"></textarea>
+          <p class="hint">用 / 分隔父分类和子分类；分类会随内容一起建立。</p>
+          <label for="tags">标签</label><input id="tags" placeholder="用逗号分隔，例如：夏天，随笔">
+          <div id="music-fields" hidden><label for="artist">歌手 / 创作者</label><input id="artist"></div>
+          <div id="link-fields" hidden>
+            <label for="share-link">平台分享链接</label><input id="share-link" type="url" placeholder="粘贴音乐或视频网站的 HTTPS 分享链接">
+            <label for="media-src">音频 / 视频文件直链（可选）</label><input id="media-src" placeholder="https://... 或上传文件后自动填写">
+            <p class="hint">平台分享链接会跳转到原平台；文件直链和上传文件可在本站播放器播放。</p>
+          </div>
+          <label for="cover">封面图片链接（可选）</label><input id="cover" placeholder="https://...">
+          <label for="cover-file" class="file-label">选择封面图片</label><input id="cover-file" type="file" accept=".jpg,.jpeg,.png,.webp,.gif,.avif">
+          <div class="upload-zone">
+            <label for="files" id="upload-label">选择图片</label><input id="files" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.gif,.avif">
+            <p id="upload-hint" class="hint"></p>
+            <div id="attachments"></div>
+          </div>
+          <div id="photo-fields" hidden>
+            <label for="photo-urls">照片链接（每行一张，上传后自动加入）</label>
+            <textarea id="photo-urls" rows="3" placeholder="也可以填写已有的 HTTPS 图片链接"></textarea>
+          </div>
+          <label for="body">正文 / 说明（Markdown）</label><textarea id="body" rows="14" placeholder="写下文字。文章中上传的图片会插入到这里。"></textarea>
+          <div class="checks">
+            <label><input id="comments" type="checkbox" checked>允许评论</label>
+            <label><input id="toc" type="checkbox">显示目录</label>
+            <label><input id="math" type="checkbox">包含数学公式</label>
+          </div>
+          <p class="hint">草稿不会出现在博客列表中；附件属于公开资源。当前后台不提供私密内容存储。</p>
+          <div class="actions">
+            <button type="submit" class="primary" id="publish">发布内容</button>
+            <button type="button" id="save-draft">保存为草稿</button>
+            <button type="button" id="download">下载编辑备份</button>
+            <button type="button" id="delete-entry" class="danger" hidden>删除内容</button>
+          </div>
+          <p class="hint">已发布内容保存为草稿会从网站下架。上传完成后仍需等待网站自动构建；删除内容保留已有附件，避免其他内容引用失效。</p>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -9,7 +9,7 @@ description: ''
 keywords:
 author: travis
 language: zh-CN
-timezone: 'Asia/shanghai'
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -30,6 +30,8 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - 'admin/**'
+  - 'media/**'
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -43,7 +45,7 @@ filename_case: 0
 render_drafts: false
 post_asset_folder: false
 relative_link: false
-future: true
+future: false
 syntax_highlighter: highlight.js
 highlight:
   line_number: true
@@ -62,11 +64,11 @@ prismjs:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 3
+  per_page: 9
   order_by: -date
 
 # Category & Tag
-default_category: uncategorized
+default_category: ''
 category_map:
 tag_map:
 
@@ -104,6 +106,9 @@ theme: mashiro
 deploy:
   type: ''
 
-# 博客加密配置
-encrypt:
-  enable: true
+# 公开的后台配置；不在这里保存访问令牌。
+content_admin:
+  owner: travisforfree
+  repo: anewarea
+  branch: main
+  max_file_mb: 20

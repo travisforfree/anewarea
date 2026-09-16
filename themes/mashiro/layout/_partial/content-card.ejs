@@ -1,0 +1,9 @@
+<article class="content-card">
+  <div class="card-meta"><span><%= content_kind(post) %></span> · <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY-MM-DD') %></time></div>
+  <h2><a href="<%= url_for(post.path) %>"><%= post.title || '未命名内容' %></a></h2>
+  <% var cover = post.kind === 'photo' && Array.isArray(post.photos) ? post.photos[0] : post.cover;
+     var coverUrl = media_url(cover); %>
+  <% if (coverUrl) { %><a href="<%= url_for(post.path) %>" class="card-image"><img src="<%= coverUrl %>" alt="<%= post.title %>" loading="lazy" decoding="async"></a><% } %>
+  <% if (post.description || post.excerpt) { %><p><%= post.description || strip_html(post.excerpt).slice(0, 180) %></p><% } %>
+  <%- partial('post/category', {post: post}) %>
+</article>

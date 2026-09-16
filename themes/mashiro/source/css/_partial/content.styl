@@ -1,0 +1,109 @@
+// Shared media and empty states, separate from content files.
+.content-section
+  margin: 30px 0 60px
+.section-title
+  font-size: 1.5em
+  margin-bottom: 28px
+.empty-state
+  color: #777
+  padding: 40px 0
+.content-list
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 28px
+.content-card
+  min-width: 0
+  border-bottom: 1px solid #ddd
+  padding-bottom: 24px
+  h2
+    margin: 10px 0 14px
+    line-height: 1.5
+    font-size: 1.25em
+  a
+    color: #333
+    text-decoration: none
+  p
+    margin: 12px 0
+    overflow-wrap: anywhere
+.card-meta
+  color: #777
+  font-size: .85em
+.card-image img
+  width: 100%
+  height: 220px
+  object-fit: cover
+  border-radius: 4px
+.photo-grid
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr))
+  gap: 16px
+  margin: 24px 0
+  img
+    display: block
+    width: 100%
+    border-radius: 4px
+.article-entry video, .article-entry audio
+  display: block
+  width: 100%
+  margin: 20px 0
+.article-entry video
+  max-height: 70vh
+  background: #111
+.category-tree
+  ul
+    margin: 12px 0 12px 24px
+  li
+    margin: 12px 0
+.category-list-count
+  margin-left: 8px
+  color: #777
+.admin-link
+  margin-left: 20px
+#comments
+  margin: 40px 0
+#main-nav-toggle
+  background: none
+  border: 0
+#mobile-nav
+  visibility: hidden
+.mobile-nav-on #mobile-nav
+  visibility: visible
+.main-nav-link
+  padding: 20px 10px
+  font-size: 16px
+.image-viewer
+  max-width: 94vw
+  max-height: 94vh
+  padding: 18px
+  border: 0
+  border-radius: 6px
+  &::backdrop
+    background: rgba(0, 0, 0, .8)
+  img
+    max-width: 86vw
+    max-height: 78vh
+    display: block
+  button
+    display: block
+    margin-left: auto
+    padding: 6px 14px
+@media screen and (max-width: 600px)
+  .content-list
+    grid-template-columns: 1fr
+  .main-nav-link
+    display: none
+  #main-nav-toggle
+    display: block
+  #mobile-nav
+    position: absolute
+    top: 0
+    left: 0
+    width: calc(50% - 1px)
+    height: 100%
+    background: white
+  .mobile-nav-link
+    display: block
+    margin: 24px 20px
+@media (prefers-reduced-motion: reduce)
+  *, *::before, *::after
+    transition: none !important

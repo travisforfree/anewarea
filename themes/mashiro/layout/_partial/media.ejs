@@ -1,0 +1,19 @@
+<% var source = media_url(post.media && post.media.src);
+   var share = media_url(post.media && post.media.link);
+   var poster = media_url(post.cover); %>
+<% if (post.kind === 'photo' && Array.isArray(post.photos)) { %>
+  <div class="photo-grid">
+    <% post.photos.forEach(function(photo, i) { var src = media_url(photo); if (!src) return; %>
+      <a class="photo-link" href="<%= src %>"><img src="<%= src %>" alt="<%= post.title %> · <%= i + 1 %>" loading="lazy" decoding="async"></a>
+    <% }) %>
+  </div>
+<% } %>
+<% if (post.kind === 'music') { %>
+  <% if (post.artist) { %><p class="media-artist"><%= post.artist %></p><% } %>
+  <% if (source) { %><audio controls preload="none" src="<%= source %>">当前浏览器不支持音频播放。</audio><p><a href="<%= source %>" target="_blank" rel="noopener noreferrer">打开音频文件</a></p><% } %>
+<% } %>
+<% if (post.kind === 'video' && source) { %>
+  <video controls playsinline preload="metadata" src="<%= source %>" <% if (poster) { %>poster="<%= poster %>"<% } %>>当前浏览器不支持视频播放。</video>
+  <p><a href="<%= source %>" target="_blank" rel="noopener noreferrer">打开视频文件</a></p>
+<% } %>
+<% if (share) { %><p><a class="media-source" href="<%= share %>" target="_blank" rel="noopener noreferrer">前往<%= post.kind === 'music' ? '音乐' : '视频' %>平台打开 ↗</a></p><% } %>

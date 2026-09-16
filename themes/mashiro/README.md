@@ -1,5 +1,7 @@
 # hexo-theme-mashiro
 
+> 本仓库已对主题作项目定制：使用 Marked、原生图片查看与复制功能、按文章启用 MathJax，评论统一为 Giscus。以下上游说明仅作历史参考，部分安装和配置步骤不适用于当前站点。请以根目录 README 和 `bolg_log/内容管理与维护指南.md` 为准；不要按旧说明直接覆盖整个主题目录。
+
 这是一个模仿CTeX默认样式的、简洁、学术风格的主题。[预览](https://mashiro.wilsonxia.cn)
 
 如果您决定使用这一主题，请至少阅读完整个使用章节。
@@ -282,4 +284,3 @@ sitemap: false
 ### TroubleShooting
 
 See [TroubleShooting](./troubleshooting.md).
-

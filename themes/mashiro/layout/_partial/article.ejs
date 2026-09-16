@@ -4,7 +4,7 @@
     <%- partial('post/category') %>
   </div>
   <div class="article-inner">
-    <%- partial('post/gallery') %>
+    <% if (post.kind !== 'photo') { %><%- partial('post/gallery') %><% } %>
     <% if (post.link || post.title){ %>
       <header class="article-header">
         <%- partial('post/title', {class_name: 'p-name article-title'}) %>
@@ -12,6 +12,7 @@
     <% } %>
     <%- partial('toc') %>
     <div class="e-content article-entry<% if (theme["title-number"] == "config" && post["title-number"] == true) { %> article-with-titlenum<% } %>" itemprop="articleBody">
+      <% if (!index) { %><%- partial('media', {post: post}) %><% } %>
       <% if (post.excerpt && index){ %>
         <%- post.excerpt %>
         <% if (theme.excerpt_link){ %>
@@ -32,23 +33,4 @@
   <% } %>
 </article>
 
-<% if (!index){ %>
-  <section id="comments" style="margin-top: 30px;">
-    <div class="giscus"></div>
-    <script src="https://giscus.app/client.js"
-            data-repo="travisforfree/anewarea"
-            data-repo-id="R_kgDOToWFVQ"
-            data-category="General"
-            data-category-id="DIC_kwDOToWFVc4DCUMR"
-            data-mapping="pathname"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-theme="preferred_color_scheme"
-            data-lang="zh-CN"
-            crossorigin="anonymous"
-            async>
-    </script>
-  </section>
-<% } %>
+<% if (!index) { %><%- partial('comments', {post: post}) %><% } %>
