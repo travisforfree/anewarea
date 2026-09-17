@@ -69,7 +69,12 @@
     contentPath(id, false);
     const ext = String(filename).split('.').pop().toLowerCase();
     if (!extensions[category]?.includes(ext)) throw new Error('不支持这个文件格式。图片请用 JPG、PNG、WebP 等；视频优先使用 MP4。');
-    if (!Number.isFinite(size) || size <= 0 || size > maxBytes) throw new Error('文件为空或超过单文件上传上限。大视频可以填写平台分享链接。');
+    if (!Number.isFinite(size) || size <= 0) throw new Error('文件为空，无法上传。');
+    if (size > maxBytes) {
+      const actual = (size / 1024 / 1024).toFixed(1);
+      const limit = (maxBytes / 1024 / 1024).toFixed(0);
+      throw new Error('“' + filename + '”为 ' + actual + ' MiB，超过单文件 ' + limit + ' MiB 的上传上限。请压缩文件或填写平台分享链接。');
+    }
     return 'source/media/' + id + '/' + crypto.randomUUID() + '.' + ext;
   }
   function encode64(bytes) {

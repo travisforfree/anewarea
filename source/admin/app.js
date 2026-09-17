@@ -5,7 +5,7 @@
   const M = window.BlogModel;
   const config = window.BLOG_ADMIN;
   let store, snapshot, entries = [], selected = null, pending = [], original = {};
-  let editorHead = '', dirty = false, busy = false;
+  let editorHead = '', dirty = false, busy = false, lastUploadError = '';
   let id = crypto.randomUUID();
   const maxBytes = (config.max_file_mb || 20) * 1024 * 1024;
   const maxBatchBytes = (config.max_batch_mb || 60) * 1024 * 1024;
@@ -52,7 +52,7 @@
     $('upload-hint').textContent = '单文件最多 ' + config.max_file_mb + ' MiB，单次总量最多 ' + config.max_batch_mb + ' MiB。' + (kind === 'video' ? '推荐 MP4（H.264/AAC）；更大的视频请填写平台链接。' : kind === 'article' ? '图片会插入正文，不需要 PicGo。' : '选择后点击发布或保存草稿才会上传。');
   }
   function resetEditor() {
-    selected = null; pending = []; original = {}; id = crypto.randomUUID();
+    selected = null; pending = []; original = {}; lastUploadError = ''; id = crypto.randomUUID();
     $('editor-form').reset();
     $('date').value = localDate();
     $('photo-urls').value = '';
@@ -198,12 +198,14 @@
         $('body').value += '\n\n![图片](' + base + url + ')\n';
       } else $('media-src').value = url;
     }
+    lastUploadError = '';
     dirty = true;
     renderAttachments();
     status('文件已选好，发布或保存草稿时会上传。');
   }
   async function save(draft) {
     if (!$('editor-form').reportValidity()) return;
+    if (['music', 'video'].includes($('kind').value) && !$('media-src').value.trim() && !$('share-link').value.trim() && lastUploadError) throw new Error(lastUploadError);
     const value = collect();
     if (!draft && new Date(value.data.date) > new Date()) throw new Error('发布日期在未来；请改为当前时间或先保存草稿。');
     if (draft && selected && !selected.draft && !confirm('保存为草稿会将这条内容从博客下架，确定继续吗？')) return;
@@ -256,8 +258,22 @@
   $('search').addEventListener('input', renderEntries);
   $('editor-form').addEventListener('input', () => { dirty = true; });
   $('kind').addEventListener('change', updateType);
-  $('files').addEventListener('change', () => { const files = [...$('files').files]; task(async () => { await addFiles(files); $('files').value = ''; }); });
-  $('cover-file').addEventListener('change', () => { const files = [...$('cover-file').files]; task(async () => { await addFiles(files, true); $('cover-file').value = ''; }); });
+  $('files').addEventListener('change', () => {
+    const files = [...$('files').files];
+    $('files').value = '';
+    task(async () => {
+      try { await addFiles(files); }
+      catch (error) { lastUploadError = error.message; throw error; }
+    });
+  });
+  $('cover-file').addEventListener('change', () => {
+    const files = [...$('cover-file').files];
+    $('cover-file').value = '';
+    task(async () => {
+      try { await addFiles(files, true); }
+      catch (error) { lastUploadError = error.message; throw error; }
+    });
+  });
   $('editor-form').addEventListener('submit', event => { event.preventDefault(); task(() => save(false)); });
   $('save-draft').addEventListener('click', () => task(() => save(true)));
   $('download').addEventListener('click', () => {

@@ -98,6 +98,13 @@ const server = http.createServer((req, res) => {
     await page.locator('#workspace').waitFor({timeout: 10000}).catch(async error => { console.log({status: await page.locator('#status').innerText(), errors, calls}); throw error; });
     assert.equal(await page.locator('#token').inputValue(), '');
     assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0);
+    await page.locator('#kind').selectOption('music');
+    await page.locator('#title').fill('格式检查');
+    await page.locator('#files').setInputFiles({name: 'unsupported.txt', mimeType: 'text/plain', buffer: Buffer.from('not audio')});
+    await page.waitForFunction(() => document.querySelector('#status').textContent.includes('不支持这个文件格式'));
+    assert.equal(await page.locator('#files').inputValue(), '');
+    await page.locator('#publish').click();
+    await page.waitForFunction(() => document.querySelector('#status').textContent.includes('不支持这个文件格式'));
     await page.locator('#kind').selectOption('photo');
     await page.locator('#title').fill('海边照片');
     await page.locator('#categories').fill('生活 / 旅行 / 深圳');
