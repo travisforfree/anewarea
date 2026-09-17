@@ -1,24 +1,32 @@
 // Shared media and empty states, separate from content files.
 .content-section
-  margin: 30px 0 60px
+  margin: 48px 0 96px
 .section-title
-  font-size: 1.5em
-  margin-bottom: 28px
+  color: #1d1d1f
+  font-family: font-display
+  font-size: clamp(2rem, 4.5vw, 3.25rem)
+  font-weight: 600
+  letter-spacing: -.045em
+  line-height: 1.04
+  margin-bottom: 36px
 .empty-state
-  color: #777
-  padding: 40px 0
+  color: #86868b
+  font-size: 1.05rem
+  padding: 48px 0
 .content-list
   display: grid
   grid-template-columns: repeat(2, minmax(0, 1fr))
-  gap: 28px
+  gap: 48px 28px
 .content-card
   min-width: 0
-  border-bottom: 1px solid #ddd
-  padding-bottom: 24px
+  border-top: 1px solid #d2d2d7
+  padding: 22px 0 32px
   h2
-    margin: 10px 0 14px
-    line-height: 1.5
-    font-size: 1.25em
+    margin: 12px 0 16px
+    line-height: 1.18
+    font-size: clamp(1.35rem, 3vw, 1.8rem)
+    font-weight: 600
+    letter-spacing: -.025em
   a
     color: #333
     text-decoration: none
@@ -26,13 +34,14 @@
     margin: 12px 0
     overflow-wrap: anywhere
 .card-meta
-  color: #777
-  font-size: .85em
+  color: #86868b
+  font-size: .78em
+  letter-spacing: .03em
 .card-image img
   width: 100%
   height: 220px
   object-fit: cover
-  border-radius: 4px
+  border-radius: 16px
 .photo-grid
   display: grid
   grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr))
@@ -41,7 +50,7 @@
   img
     display: block
     width: 100%
-    border-radius: 4px
+    border-radius: 16px
 .article-entry video, .article-entry audio
   display: block
   width: 100%
@@ -61,16 +70,6 @@
   margin-left: 20px
 #comments
   margin: 40px 0
-#main-nav-toggle
-  background: none
-  border: 0
-#mobile-nav
-  visibility: hidden
-.mobile-nav-on #mobile-nav
-  visibility: visible
-.main-nav-link
-  padding: 20px 10px
-  font-size: 16px
 .image-viewer
   max-width: 94vw
   max-height: 94vh
@@ -90,20 +89,6 @@
 @media screen and (max-width: 600px)
   .content-list
     grid-template-columns: 1fr
-  .main-nav-link
-    display: none
-  #main-nav-toggle
-    display: block
-  #mobile-nav
-    position: absolute
-    top: 0
-    left: 0
-    width: calc(50% - 1px)
-    height: 100%
-    background: white
-  .mobile-nav-link
-    display: block
-    margin: 24px 20px
 @media (prefers-reduced-motion: reduce)
   *, *::before, *::after
     transition: none !important

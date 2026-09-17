@@ -1,5 +1,5 @@
 .article
-  margin: block-margin 0
+  margin: 48px 0 96px
 
 .article-inner
   @extend $block
@@ -31,10 +31,12 @@
 
 .article-title
   text-decoration: none
-  font-size: 2em
-  font-weight: bold
-  color: color-default
-  line-height: line-height-title
+  font-family: font-display
+  font-size: clamp(2rem, 4.8vw, 3.6rem)
+  font-weight: 600
+  letter-spacing: -.045em
+  color: #1d1d1f
+  line-height: 1.02
   transition: color 0.2s
   a&:hover
     color: color-link
@@ -47,7 +49,7 @@ if (hexo-config("title-number") == "config")
   if hexo-config("title-number") == "all"
     @extend $title-number
   // @media screen
-  text-align: justify
+  text-align: left
   // @media screen and (max-width: 600px)
   //   text-align: justify
   @extend $base-style
@@ -55,12 +57,16 @@ if (hexo-config("title-number") == "config")
   .markdown-them-math-inline:before, .markdown-them-math-inline:after
     content: " "
   color: color-default
+  font-size: 1.02rem
+  letter-spacing: -.005em
   p, table
     line-height: line-height
     margin: 0.5 * line-height 0
   h1, h2, h3, h4, h5, h6
-    font-weight: bold
-    line-height: line-height-title
+    font-family: font-display
+    font-weight: 650
+    letter-spacing: -.035em
+    line-height: 1.15
     margin: 1.5 * line-height-title 0 line-height-title
   a
     color: color-link

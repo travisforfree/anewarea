@@ -1,13 +1,45 @@
-<section class="content-section">
-  <h1 class="section-title">最新内容</h1>
-  <% if (!page.posts.length) { %>
-    <p class="empty-state">这里还没有内容。</p>
-  <% } else { %>
-    <div class="content-list">
-      <% page.posts.each(function(post) { %>
-        <%- partial('_partial/content-card', {post: post}) %>
-      <% }) %>
+<% var firstPage = !page.current || page.current === 1; %>
+<% if (firstPage) { %>
+<section class="home-experience" data-home-experience aria-labelledby="home-title">
+  <div class="home-stage">
+    <div class="home-wordmark">
+      <div class="home-wordmark-content">
+        <h1 id="home-title">A NEW AREA</h1>
+        <p class="home-title-zh">新领域</p>
+      </div>
     </div>
-    <%- partial('_partial/pagination') %>
-  <% } %>
+
+    <div class="home-directory" id="explore">
+      <nav class="home-portals" aria-label="内容板块">
+        <a class="home-portal" href="<%= url_for('/articles/') %>">
+          <span class="home-portal-copy"><strong>WRITING</strong><small>文章</small></span>
+        </a>
+        <a class="home-portal" href="<%= url_for('/album/') %>">
+          <span class="home-portal-copy"><strong>ALBUM</strong><small>相册</small></span>
+        </a>
+        <a class="home-portal" href="<%= url_for('/music/') %>">
+          <span class="home-portal-copy"><strong>MUSIC</strong><small>音乐</small></span>
+        </a>
+      </nav>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="home-feed content-section" aria-labelledby="latest-title">
+  <div class="home-feed-inner">
+    <header class="home-feed-header">
+      <h2 id="latest-title" class="section-title"><span>LATEST</span><small>最新内容</small></h2>
+    </header>
+    <% if (!page.posts.length) { %>
+      <p class="empty-state">这里还没有内容。</p>
+    <% } else { %>
+      <div class="content-list">
+        <% page.posts.each(function(post) { %>
+          <%- partial('_partial/content-card', {post: post}) %>
+        <% }) %>
+      </div>
+      <%- partial('_partial/pagination') %>
+    <% } %>
+  </div>
 </section>

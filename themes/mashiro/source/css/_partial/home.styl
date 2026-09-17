@@ -1,0 +1,216 @@
+.is-home
+  background: #fff
+
+.is-home #content
+  width: 100%
+  max-width: none
+  margin: 0
+
+.is-home #main
+  width: 100%
+
+.home-experience
+  --hero-opacity: 1
+  --hero-y: 0px
+  --hero-scale: 1
+  --directory-opacity: 0
+  --directory-y: 44px
+  position: relative
+  height: 205svh
+  min-height: 1240px
+  color: #1d1d1f
+  background: #fff
+
+.home-stage
+  position: sticky
+  top: 0
+  height: 100svh
+  min-height: 580px
+  overflow: hidden
+
+.home-wordmark,
+.home-directory
+  position: absolute
+  inset: 0
+  box-sizing: border-box
+
+.home-wordmark
+  display: grid
+  place-items: center
+  padding: 48px 24px
+  opacity: var(--hero-opacity)
+  transform: translate3d(0, var(--hero-y), 0) scale(var(--hero-scale))
+  will-change: opacity, transform
+
+.home-wordmark-content
+  text-align: center
+
+.home-wordmark h1
+  margin: 0
+  color: #1d1d1f
+  font-family: font-display
+  font-size: clamp(3.7rem, 9.7vw, 8.7rem)
+  font-weight: 600
+  letter-spacing: -.065em
+  line-height: .9
+  animation: home-title-arrive 1.8s cubic-bezier(.22, 1, .36, 1) both
+
+.home-title-zh
+  margin: 26px 0 0
+  color: #86868b
+  font-size: 14px
+  font-weight: 400
+  letter-spacing: .24em
+  animation: home-subtitle-arrive 1.25s .35s cubic-bezier(.22, 1, .36, 1) both
+
+.home-directory
+  display: flex
+  align-items: center
+  width: calc(100% - 64px)
+  max-width: 1160px
+  margin: 0 auto
+  padding: 70px 0 34px
+  opacity: var(--directory-opacity)
+  pointer-events: none
+  transform: translate3d(0, var(--directory-y), 0)
+  will-change: opacity, transform
+
+.home-directory-ready .home-directory
+  pointer-events: auto
+
+.home-portals
+  width: 100%
+  border-bottom: 1px solid #d2d2d7
+
+.home-portal
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  box-sizing: border-box
+  min-height: 150px
+  padding: 28px 8px 26px
+  border-top: 1px solid #d2d2d7
+  color: #1d1d1f
+  text-decoration: none
+  transition: color .35s ease, padding .35s ease
+
+.home-portal:hover
+  color: #6e6e73
+  padding-right: 20px
+  padding-left: 20px
+
+.home-portal-copy
+  display: flex
+  width: 100%
+  align-items: baseline
+  justify-content: space-between
+
+.home-portal-copy strong
+  font-family: font-display
+  font-size: clamp(3.4rem, 7vw, 6rem)
+  font-weight: 550
+  letter-spacing: -.06em
+  line-height: 1
+
+.home-portal-copy small
+  color: #86868b
+  font-size: 15px
+  font-weight: 400
+  letter-spacing: .08em
+
+.home-feed
+  margin: 0
+  padding: 132px 32px 150px
+  background: #f5f5f7
+
+.home-feed-inner
+  width: 100%
+  max-width: 1160px
+  margin: 0 auto
+
+.home-feed-header
+  margin-bottom: 54px
+
+.section-title small
+  display: inline-block
+  margin-left: 18px
+  color: #86868b
+  font-size: 14px
+  font-weight: 400
+  letter-spacing: .08em
+  vertical-align: baseline
+
+@keyframes home-title-arrive
+  0%
+    color: #e5e5e7
+    opacity: .16
+    filter: blur(8px)
+    transform: translateY(14px)
+  100%
+    color: #1d1d1f
+    opacity: 1
+    filter: blur(0)
+    transform: translateY(0)
+
+@keyframes home-subtitle-arrive
+  0%
+    opacity: 0
+    transform: translateY(8px)
+  100%
+    opacity: 1
+    transform: translateY(0)
+
+@media screen and (max-width: 760px)
+  .home-experience
+    min-height: 1160px
+  .home-stage
+    min-height: 540px
+  .home-wordmark h1
+    max-width: 340px
+    font-size: clamp(3.35rem, 17vw, 5.1rem)
+    line-height: .9
+  .home-title-zh
+    margin-top: 22px
+  .home-directory
+    width: calc(100% - 40px)
+    padding-top: 58px
+  .home-portal
+    min-height: 112px
+    padding: 25px 4px 22px
+  .home-portal:hover
+    padding-right: 4px
+    padding-left: 4px
+  .home-portal-copy strong
+    font-size: clamp(2.55rem, 13vw, 3.6rem)
+  .home-portal-copy small
+    font-size: 13px
+  .home-feed
+    padding: 88px 20px 110px
+
+@media (prefers-reduced-motion: reduce)
+  .home-experience
+    height: auto
+    min-height: 0
+  .home-stage
+    position: relative
+    height: auto
+    min-height: 0
+    overflow: visible
+  .home-wordmark,
+  .home-directory
+    position: relative
+    inset: auto
+    opacity: 1
+    transform: none
+  .home-wordmark
+    min-height: 100svh
+  .home-wordmark h1,
+  .home-title-zh
+    animation: none
+  .home-directory
+    min-height: 100svh
+    pointer-events: auto
+  .is-home:not(.home-past-intro) #nav-outer
+    opacity: 1
+    pointer-events: auto
+    transform: none

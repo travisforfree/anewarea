@@ -1,21 +1,37 @@
-@media mq-mobile
-  #mobile-nav
-    position: absolute
-    top: 0
-    left: 0
-    width: calc(50% - 1px)
-    height: 100%
-    background: color-mobile-nav-background
-    border-right: 1px solid #ddd
+#mobile-nav
+  position: fixed
+  top: 48px
+  right: 0
+  bottom: 0
+  left: 0
+  box-sizing: border-box
+  padding: 28px 24px 48px
+  background: rgba(255,255,255,.98)
+  opacity: 0
+  visibility: hidden
+  transform: translateY(-12px)
+  transition: opacity .25s ease, transform .25s ease, visibility .25s
+  z-index: 19
 
-@media mq-mobile
-  .mobile-nav-link
-    display: block
-    color: color-grey
-    font-weight: normal
-    font-size: 1.1em
-    text-decoration: none
-    margin: 30px 20px
-    word-break: break-word
-    &:hover
-      text-decoration: underline
+.mobile-nav-on #mobile-nav
+  opacity: 1
+  visibility: visible
+  transform: translateY(0)
+
+.mobile-nav-link
+  display: block
+  max-width: 640px
+  margin: 0 auto
+  padding: 15px 4px
+  border-bottom: 1px solid rgba(0,0,0,.1)
+  color: #1d1d1f
+  font-family: font-display
+  font-size: clamp(1.4rem, 6vw, 2.1rem)
+  font-weight: 600
+  letter-spacing: -.035em
+  line-height: 1.2
+  text-decoration: none
+
+@media screen and (min-width: 761px)
+  #mobile-nav
+    display: none

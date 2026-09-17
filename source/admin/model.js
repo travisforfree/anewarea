@@ -3,7 +3,7 @@
   else root.BlogModel = factory(root.jsyaml);
 })(typeof globalThis !== 'undefined' ? globalThis : this, function(yaml) {
   'use strict';
-  const kinds = {article: '文章', photo: '照片', music: '音乐', video: '视频'};
+  const kinds = {article: '文章', photo: '相册 · 照片', music: '音乐', video: '相册 · 视频'};
   const extensions = {
     image: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif'],
     audio: ['mp3', 'm4a', 'ogg', 'wav', 'flac', 'aac'],

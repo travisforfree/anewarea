@@ -1,15 +1,18 @@
 <div id="nav-outer">
   <nav id="main-nav" class="outer">
+    <a class="main-nav-brand" href="<%- url_for() %>" aria-label="<%= config.title %> 首页"><%= config.title %></a>
     <button id="main-nav-toggle" class="nav-icon" type="button" aria-label="展开菜单" aria-controls="mobile-nav" aria-expanded="false"></button>
-    <% for (var i in theme.menu){ %>
-      <a class="main-nav-link" href="<%- url_for(theme.menu[i], {relative: theme.menu[i][0] != '/'}) %>"><%= i %></a>
-    <% } %>
-    <div class="main-nav-space-between"></div>
+    <div class="main-nav-links">
+      <% for (var i in theme.menu){ %>
+        <a class="main-nav-link" href="<%- url_for(theme.menu[i], {relative: theme.menu[i][0] != '/'}) %>"><%= i %></a>
+      <% } %>
+    </div>
     <% if (theme.rss){ %>
       <a id="nav-rss-link" class="nav-icon" href="<%- url_for(theme.rss, {relative: theme.menu[i][0] != '/'}) %>" title="<%= __('rss_feed') %>"></a>
     <% } %>
   </nav>
 </div>
+<% if (!is_home()) { %>
 <div id="header-title">
   <h1 id="logo-wrap">
     <a href="<%- url_for() %>" id="logo"><%= config.title.replace(/，/g, ', ').replace(/；/g, '; ').replace(/：/g, ': ').replace(/！/g, '! ').replace(/‘/g, '` ').replace(/’/g, "' ").replace(/“/g, ' “').replace(/”/g, "” ").replace(/（/g, ' (').replace(/）/g, ') ').replace(/。/g, '. ').replace(/？/g, '? ') %></a>
@@ -20,3 +23,4 @@
     </h2>
   <% } %>
 </div>
+<% } %>

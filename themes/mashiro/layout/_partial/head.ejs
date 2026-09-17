@@ -10,9 +10,5 @@
   <title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
   <% if (description) { %><meta name="description" content="<%= String(description).trim().slice(0, 160) %>"><% } %>
   <% if (page.permalink) { %><link rel="canonical" href="<%= page.permalink %>"><% } %>
-  <%- css('/css/fonts/Chinese-normal-normal.min') %>
-  <%- css('/css/fonts/ChineseMono-normal-normal.min') %>
-  <%- css('/css/fonts/Chinese-italic-normal.min') %>
-  <%- css('/css/fonts/Chinese-normal-bold.min') %>
   <%- css('/css/style') %>
 </head>

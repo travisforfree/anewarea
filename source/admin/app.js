@@ -8,6 +8,7 @@
   let editorHead = '', dirty = false, busy = false;
   let id = crypto.randomUUID();
   const maxBytes = (config.max_file_mb || 20) * 1024 * 1024;
+  const maxBatchBytes = (config.max_batch_mb || 60) * 1024 * 1024;
   const cache = new Map();
   const fields = ['kind', 'date', 'title', 'description', 'categories', 'tags', 'artist', 'share-link', 'media-src', 'cover', 'photo-urls', 'body', 'comments', 'toc', 'math'];
 
@@ -48,7 +49,7 @@
     $('files').accept = M.extensions[category].map(ext => '.' + ext).join(',');
     $('files').multiple = category === 'image';
     $('upload-label').textContent = kind === 'music' ? '选择音频文件（可选）' : kind === 'video' ? '选择视频文件（可选）' : '选择照片';
-    $('upload-hint').textContent = '单文件最多 ' + config.max_file_mb + ' MiB，一次最多 12 个附件。' + (kind === 'video' ? '推荐 MP4（H.264/AAC）；较大的视频请填写平台链接。' : kind === 'article' ? '图片会插入正文，不需要 PicGo。' : '选择后点击发布或保存草稿才会上传。');
+    $('upload-hint').textContent = '单文件最多 ' + config.max_file_mb + ' MiB，单次总量最多 ' + config.max_batch_mb + ' MiB。' + (kind === 'video' ? '推荐 MP4（H.264/AAC）；更大的视频请填写平台链接。' : kind === 'article' ? '图片会插入正文，不需要 PicGo。' : '选择后点击发布或保存草稿才会上传。');
   }
   function resetEditor() {
     selected = null; pending = []; original = {}; id = crypto.randomUUID();
@@ -186,7 +187,7 @@
       const path = M.mediaPath(id, file.name, category, maxBytes, file.size);
       additions.push({path, bytes: new Uint8Array(await file.arrayBuffer()), name: file.name});
     }
-    if ([...pending, ...additions].reduce((n, item) => n + item.bytes.length, 0) > 60 * 1024 * 1024) throw new Error('一次上传总量最多 60 MiB，请分次添加。');
+    if ([...pending, ...additions].reduce((n, item) => n + item.bytes.length, 0) > maxBatchBytes) throw new Error('一次上传总量最多 ' + config.max_batch_mb + ' MiB，请分次添加。');
     for (const item of additions) {
       const url = item.path.slice('source'.length);
       pending.push(item);

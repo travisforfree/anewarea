@@ -1,6 +1,41 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const homeExperience = document.querySelector('[data-home-experience]');
+  if (homeExperience) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let framePending = false;
+    const clamp = value => Math.max(0, Math.min(1, value));
+
+    const updateHome = () => {
+      framePending = false;
+      if (reducedMotion.matches) {
+        document.body.classList.add('home-past-intro', 'home-directory-ready');
+        return;
+      }
+      const scrollRange = Math.max(homeExperience.offsetHeight - window.innerHeight, 1);
+      const progress = clamp(-homeExperience.getBoundingClientRect().top / scrollRange);
+      const heroOpacity = clamp(1 - progress / .48);
+      const directoryOpacity = clamp((progress - .30) / .42);
+      homeExperience.style.setProperty('--hero-opacity', heroOpacity.toFixed(3));
+      homeExperience.style.setProperty('--hero-y', `${(-progress * 54).toFixed(1)}px`);
+      homeExperience.style.setProperty('--hero-scale', (1 - progress * .055).toFixed(3));
+      homeExperience.style.setProperty('--directory-opacity', directoryOpacity.toFixed(3));
+      homeExperience.style.setProperty('--directory-y', `${((1 - directoryOpacity) * 56).toFixed(1)}px`);
+      document.body.classList.toggle('home-past-intro', progress > .42);
+      document.body.classList.toggle('home-directory-ready', directoryOpacity > .55);
+    };
+    const scheduleHomeUpdate = () => {
+      if (framePending) return;
+      framePending = true;
+      requestAnimationFrame(updateHome);
+    };
+    window.addEventListener('scroll', scheduleHomeUpdate, {passive: true});
+    window.addEventListener('resize', scheduleHomeUpdate);
+    reducedMotion.addEventListener?.('change', scheduleHomeUpdate);
+    updateHome();
+  }
+
   const container = document.getElementById('container');
   const toggle = document.getElementById('main-nav-toggle');
   const wrap = document.getElementById('wrap');

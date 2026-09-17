@@ -30,7 +30,21 @@ const server = http.createServer((req, res) => {
     await page.goto(origin + '/');
     await page.locator('.empty-state').waitFor();
     assert.equal(await page.locator('.content-card').count(), 0);
+    assert.equal(await page.locator('.home-portal').count(), 3);
+    assert.equal(await page.locator('#home-title').innerText(), 'A NEW AREA');
+    await page.evaluate(() => window.scrollTo(0, document.querySelector('[data-home-experience]').offsetHeight * .62));
+    await page.waitForFunction(() => document.body.classList.contains('home-directory-ready'));
+    assert.equal(await page.locator('.home-directory').evaluate(element => Number(getComputedStyle(element).opacity) > .5), true);
     await page.setViewportSize({width: 390, height: 844});
+    await page.waitForTimeout(100);
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight - innerHeight));
+    await page.waitForFunction(() => document.body.classList.contains('home-past-intro'));
+    await page.waitForTimeout(550);
+    const menuRect = await page.locator('#main-nav-toggle').evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return {top: rect.top, right: rect.right, bottom: rect.bottom, left: rect.left};
+    });
+    assert.ok(menuRect.left >= 0 && menuRect.right <= 390 && menuRect.top >= 0 && menuRect.bottom <= 844, JSON.stringify(menuRect));
     await page.locator('#main-nav-toggle').click();
     assert.equal(await page.locator('#main-nav-toggle').getAttribute('aria-expanded'), 'true');
     await page.keyboard.press('Escape');

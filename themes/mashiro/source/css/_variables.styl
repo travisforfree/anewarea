@@ -18,9 +18,12 @@ color-facebook = #3b5998
 color-pinterest = #cb2027
 color-linkedin = #0077B5
 
-// Fonts
-font-serif =  "biaodian", "LM-Roman-10", "Chinese",  serif
-font-mono = "LM-Mono-10", "Courier", "ChineseMono", monospace
+// Inter gives Latin text one consistent shape; Chinese falls back to the native UI font.
+font-system = InterVariable, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "PingFang SC", "Microsoft YaHei UI", sans-serif
+font-display = InterVariable, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "PingFang SC", "Microsoft YaHei UI", sans-serif
+font-serif = font-system
+font-sans = font-system
+font-mono = "SFMono-Regular", "SF Mono", "Cascadia Code", "Consolas", monospace
 
 Chinese-normal-normal-path = "fonts/HYShuSongErS.ttf"
 Chinese-normal-bold-path = "fonts/FZHTJW.ttf"
@@ -30,9 +33,9 @@ ChineseMono-normal-normal-path = "fonts/HYFangSongJ.ttf"
 font-icon = FontAwesome
 font-icon-path = "fonts/fontawesome-webfont"
 font-icon-version = "4.7.0"
-font-size = 16px
-line-height = 1.6em
-line-height-title = 1.1em
+font-size = 17px
+line-height = 1.65em
+line-height-title = 1.08em
 
 // Header
 logo-size = 40px

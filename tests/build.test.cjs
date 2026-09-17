@@ -25,15 +25,20 @@ test('empty/populated site routes, media, hierarchy and scoped comments', async 
   };
   try {
     await build();
-    for (const route of ['index.html', 'articles/index.html', 'gallery/index.html', 'music/index.html', 'videos/index.html', 'categories/index.html', 'archives/index.html']) {
+    for (const route of ['index.html', 'articles/index.html', 'album/index.html', 'music/index.html', 'categories/index.html', 'archives/index.html']) {
       assert.ok(read(route).includes('/anewarea/css/style.css'), route);
       assert.ok(!read(route).includes('giscus.app/client.js'), route + ' comments off');
       assert.ok(!read(route).includes('mathjax/tex-chtml.js'), route + ' math off');
     }
     assert.match(read('index.html'), /这里还没有内容/);
+    assert.match(read('index.html'), /data-home-experience/);
+    assert.match(read('index.html'), /A NEW AREA/);
+    assert.equal((read('index.html').match(/class="home-portal"/g) || []).length, 3);
     assert.ok(read('admin/index.html').startsWith('<!doctype html>'));
     assert.ok(!read('admin/index.html').includes('giscus.app'));
     assert.match(read('admin/config.js'), /travisforfree/);
+    assert.match(read('admin/config.js'), /"max_file_mb":48/);
+    assert.ok(fs.statSync(path.join(dir, 'public/css/fonts/inter-latin-opsz-normal.woff2')).size > 40000);
     const post = (name, data, body = '') => fs.writeFileSync(path.join(source, '_posts', name + '.md'), '---\n' + yaml.dump({title: name, date: '2026-08-01 12:00:00', permalink: 'entries/' + name + '/', ...data}) + '---\n\n' + body);
     post('photo-test', {kind: 'photo', photos: ['/media/test/a.jpg'], categories: ['生活', '旅行', '深圳'], comments: true});
     post('video-test', {kind: 'video', media: {src: '/media/test/video.mp4'}, comments: false});
@@ -45,6 +50,8 @@ test('empty/populated site routes, media, hierarchy and scoped comments', async 
     assert.equal((read('entries/photo-test/index.html').match(/giscus.app\/client.js/g) || []).length, 1);
     assert.equal((read('entries/photo-test/index.html').match(/src="\/anewarea\/media\/test\/a.jpg"/g) || []).length, 1);
     assert.match(read('entries/video-test/index.html'), /<video controls playsinline/);
+    assert.match(read('album/index.html'), /photo-test/);
+    assert.match(read('album/index.html'), /video-test/);
     assert.ok(!read('entries/video-test/index.html').includes('giscus.app'));
     assert.match(read('entries/music-0/index.html'), /<audio controls preload="none"/);
     assert.match(read('entries/music-0/index.html'), /https:\/\/example.com\/listen/);
